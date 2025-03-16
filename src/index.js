@@ -20,9 +20,7 @@ all images are stored in public/image folder which get serverd with full path pr
 const server = http.createServer((req, res) => {
     let filePath = path.join(publicFolder, req.url === '/' ? 'index.html' : req.url);
 
-    console.log(req.url)
     const htmlRequested = !req.url.startsWith(imagePublicSubfolderPath)
-    console.log(htmlRequested)
     if (htmlRequested && !filePath.endsWith('.html')) {
         filePath += '.html';
     }
