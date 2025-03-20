@@ -12,6 +12,9 @@ const imageFolderPath = publicFolderPath + imagePublicSubfolderPath;
 const publicFolder = path.join(__dirname, publicFolderPath);
 
 
+const restApiFilePath = path.join(publicFolder, "rest_metode.txt");
+
+
 
 /*
 server serves all html files in public folder, req path shouldn't include .html at the end
@@ -21,6 +24,20 @@ const server = http.createServer((req, res) => {
     let filePath = path.join(publicFolder, req.url === '/' ? 'index.html' : req.url);
 
     const htmlRequested = !req.url.startsWith(imagePublicSubfolderPath)
+    
+    if (req.url === "/REST") {
+        fs.readFile(restApiFilePath, "utf8", (err, data) => {
+            if (err) {
+                res.writeHead(500, { "Content-Type": "text/plain" });
+                res.end("File rest_metode.txt not found\n");
+            } else {
+                res.writeHead(200, { "Content-Type": "text/plain" });
+                res.end(data);
+            }
+        });
+        return;
+    }
+    
     if (htmlRequested && !filePath.endsWith('.html')) {
         filePath += '.html';
     }

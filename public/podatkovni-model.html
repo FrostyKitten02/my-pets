@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="sl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podatkovni model</title>
+    <style>
+        body {
+            margin: 50px;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+        table {
+            width: auto;
+            border-collapse: collapse;
+            margin: 20px 0 40px;
+        }
+
+        th,
+        td {
+            border: 1px solid;
+            padding: 10px;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Podatkovni Model</h1>
+    <p>Ta stran opisuje podatkovni model spletne aplikacije.</p>
+
+    <h2>Glavne entitete</h2>
+
+    <h3>Uporabnik</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>uporabniško ime</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>VARCHAR</td>
+        </tr>
+    </table>
+
+    <h3>Hišni ljubljenček</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>ime</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>vrsta</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>pasma</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>datum rojstva</td>
+            <td>DATE</td>
+        </tr>
+        <tr>
+            <td>spol</td>
+            <td>ENUM</td>
+        </tr>
+        <tr>
+            <td>teža</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>slika</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>uporabnik_id</td>
+            <td>INT</td>
+        </tr>
+    </table>
+
+    <h3>Hrana</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>ime</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>rok uporabe</td>
+            <td>DATE</td>
+        </tr>
+        <tr>
+            <td>opozorila</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>sestavine</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>hranilna vrednost</td>
+            <td>VARCHAR</td>
+        </tr>
+    </table>
+
+    <h3>Prigrizki</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>ime</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>tip</td>
+            <td>VARCHAR</td>
+        </tr>
+    </table>
+
+    <h3>Veterinarski obiski</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>datum</td>
+            <td>DATETIME</td>
+        </tr>
+        <tr>
+            <td>tip</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>opis</td>
+            <td>TEXT</td>
+        </tr>
+        <tr>
+            <td>veterinar</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>ljubljenček_id</td>
+            <td>INT</td>
+        </tr>
+    </table>
+
+    <h3>Izvidi</h3>
+    <table>
+        <tr>
+            <th>Atribut</th>
+            <th>Tip</th>
+        </tr>
+        <tr>
+            <td>id</td>
+            <td>INT</td>
+        </tr>
+        <tr>
+            <td>diagnoza</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>zdravljenje</td>
+            <td>VARCHAR</td>
+        </tr>
+        <tr>
+            <td>ljubljenček_id</td>
+            <td>INT</td>
+        </tr>
+    </table>
+
+    <h2>Dostopnost Podatkov</h2>
+
+    <p>Podatki, ki morajo biti vedno na napravi:</p>
+    <ul>
+        <li>Hišni ljubljenček</li>
+        <ul>
+            <li>Uporabnik lahko pregleduje in ureja podatke o svojem ljubljenčku.</li>
+            <li>Sinhronizacija ob spremembi (da so podatki posodobljeni na vseh napravah).</li>
+        </ul>
+        <li>Priboljški/Hrana</li>
+        <ul>
+            <li>Uporabnik izbira priboljške/hrano pogosto in jih potrebuje tudi brez internetne povezave.</li>
+            <li>Sinhronizacija enkrat tedensko (ker se seznam redko spreminja).</li>
+        </ul>
+    </ul>
+
+    <p>Podatki, ki so na voljo samo na strežniku:</p>
+    <ul>
+        <li>Uporabnik</li>
+        <ul>
+            <li>Občutljivi podatki, ki jih je treba zaščititi in so potrebni za avtentikacijo.</li>
+            <li>Sinhronizacija ob spremembi.</li>
+        </ul>
+        <li>Veterinarski obiski/Izvidi </li>
+        <ul>
+            <li>Pomembni podatki za zgodovino zdravljenja ljubljenčka.</li>
+            <li>Sinhronizacija ob vsakem dodanem obisku.</li>
+        </ul>
+    </ul>
+
+    <h2>ER Diagram</h2>
+    <p>Diagram prikazuje povezave med entitetami.</p>
+    <img src="image/er_diagram.png" alt="ER Diagram">
+</body>
+
+</html>

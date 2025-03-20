@@ -1,0 +1,54 @@
+NABOR REST STOITEV IN METOD
+
+UPORABNIK:
+- POST /users/register - registracija novega uporabnika
+- POST /users/login - avtentikacija uporabnika
+- GET /users/ - vrne vse uporabnike
+- GET /users/{id} - vrne podatke o uporabniku z dolocenim id-jem
+- PUT /users/{id} - posodobi podatke o uporabniku z dolocenim id-jem
+- DELETE /users/{id} - izbrise uporabnika z dolocenim id-jem
+
+HISNI LJUBLJENCKI:
+- POST /pets - doda novega ljubljencka
+- GET /pets - vrne vse ljubljencke
+- GET /pets?user_id={id} - vrne vse ljubljencke dolocenega uporabnika
+- GET /pets/{id} - vrne podatke o ljubljencku z dolocenim id-jem
+- PUT /pets/{id} - posodobi podatke o ljubljencku z dolocenim id-jem
+- DELETE /pets/{id} - izbrise ljubljencka z dolocenim id-jem
+
+HRANJENJE:
+- POST /feeding - doda nov urnik hranjenja
+- GET /feeding?user_id={id} - vrne vsa hranjenja vseh ljubljenckov dolocenega uporabnika
+- GET /feeding?pet_id={id} - vrne vsa hranjenja dolocenega ljubljencka
+- PUT /feeding/{id} - posodobi podatke o dolocenem hranjenju
+- DELETE /feeding/{id} - izbrise hranjenje z dolocenim id-jem
+
+HRANA:
+- POST /food - doda novo hrano
+- GET /food - vrne vse vnose hrane
+- GET /food/{id} - vrne podatke o hrani z dolocenim id-jem
+- PUT /food/{id} - posodobi podatke o hrani z dolocenim id-jem
+- DELETE /food/{id} - izbrise hrano z dolocenim id-jem
+
+PRIBOLJSKI:
+- POST /treats - doda nov priboljsek
+- GET /treats - vrne vse priboljske
+- GET /treats/{id} - vrne podatke o priboljsku z dolocenim id-jem
+- PUT /treats/{id} - posodobi podatke o priboljsku z dolocenim id-jem
+- DELETE /treats/{id} - izbrise priboljsek z dolocenim id-jem
+
+OBISKI VETERINARJA:
+- POST /vet_visits - doda nov obisk
+- GET /vet_visits?user_id={id} - vrne vse obiske za dolocenega uporabnika
+- GET /vet_visits?pet_id={id} - vrne vse obiske za dolocenega ljubljencka
+- GET /vet_visits/{id} - vrne podrobnosti dolocenega obiskaD
+- PUT /vet_visits/{id} - posodobi podatke o obisku z dolocenim id-jem
+- DELETE /vet_visits/{id} - izbrise obisk z dolocenim id-jem
+
+IZVIDI:
+- POST /medical_records - doda nov izvid
+- GET /medical_records?user_id={id} - vrne vse izvide za dolocenega uporabnika
+- GET /medical_records?pet_id={id} - vrne vse izvide za dolocenega ljubljencka
+- GET /medical_records/{id} - vrne podatke o izvidu z dolocenim id-jem
+- PUT /medical_records/{id} - posodobi podatke o izvidu z dolocenim id-jem
+- DELETE /medical_records/{id} - izbrise izvid z dolocenim id-jem
