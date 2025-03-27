@@ -5,7 +5,15 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+const indexRouter = require('./routes/');
 const petsRouter = require('./routes/pets');
+const usersRouter = require('./routes/users');
+const foodRouter = require('./routes/food');
+const treatsRouter = require('./routes/treats');
+const feedingRouter = require('./routes/feeding');
+const petTreatsRouter = require('./routes/pet_treats');
+const visitsRouter = require('./routes/veterinary_visits');
+const recordsRouter = require('./routes/medical_records');
 
 const app = express();
 
@@ -30,7 +38,15 @@ app.use((req, res, next) => {
 
 
 //ROUTERS
+app.use('/', indexRouter);
 app.use('/pets', petsRouter);
+app.use('/users', usersRouter);
+app.use('/food', foodRouter);
+app.use('/treats', treatsRouter);
+app.use('/feeding', feedingRouter);
+app.use('/pettreats', petTreatsRouter);
+app.use('/veterinary-visits', visitsRouter);
+app.use('/medical-records', recordsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
