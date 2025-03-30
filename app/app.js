@@ -5,9 +5,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+const {authRouter, isAuthenticated} = require("./routes/authRouter");
 const indexRouter = require('./routes/');
 const petsRouter = require('./routes/pets');
-const usersRouter = require('./routes/users');
 const foodRouter = require('./routes/food');
 const treatsRouter = require('./routes/treats');
 const feedingRouter = require('./routes/feeding');
@@ -38,9 +38,10 @@ app.use((req, res, next) => {
 
 
 //ROUTERS
+app.use('/auth', authRouter)
 app.use('/', indexRouter);
+app.use(isAuthenticated)
 app.use('/pets', petsRouter);
-app.use('/users', usersRouter);
 app.use('/food', foodRouter);
 app.use('/treats', treatsRouter);
 app.use('/feeding', feedingRouter);
