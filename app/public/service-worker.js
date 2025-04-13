@@ -138,7 +138,6 @@ function openDB() {
     });
 }
 
-// Save pending requests to IndexedDB
 async function savePendingRequest(requestData) {
     const db = await openDB();
     const transaction = db.transaction(['requests'], 'readwrite');
@@ -163,7 +162,6 @@ async function syncPendingRequests() {
     const store = transaction.objectStore('requests');
     const allRequests = await getAllRequestsFromStore(store)
 
-    // Process each pending request and sync with the server
     for (const requestData of allRequests) {
         const request = new Request(requestData.url, {
             method: requestData.method,
@@ -175,7 +173,6 @@ async function syncPendingRequests() {
             const response = await fetch(request);
             if (response.ok) {
                 console.log('Request synced successfully:', requestData);
-                // Remove the successfully processed request from IndexedDB
                 const deleteTransaction = db.transaction(['requests'], 'readwrite');
                 const deleteStore = deleteTransaction.objectStore('requests');
                 deleteStore.delete(requestData.id);

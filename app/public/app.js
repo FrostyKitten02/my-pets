@@ -65,7 +65,9 @@ async function addPet() {
 }
 
 function clearForm() {
-    ['petName', 'petType', 'sex', 'editingId'].forEach(id => {
+    document.getElementById("sex").value = "M";
+
+    ['petName', 'petType', 'editingId'].forEach(id => {
         document.getElementById(id).value = '';
     });
 }
@@ -155,3 +157,18 @@ window.addEventListener('online', () => {
         navigator.serviceWorker.controller.postMessage({ type: 'SYNC_REQUEST' });
     }
 });
+
+document.addEventListener('keydown', handleKeyboardShortcuts);
+
+function handleKeyboardShortcuts(e) {
+    if (e.key === "Enter") {
+        addPet()
+    }
+
+    // Ctrl+F or Cmd+F → Focus search input
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'f') {
+        e.preventDefault();
+        const searchInput = document.querySelector('#searchInput'); // or your actual input selector
+        if (searchInput) searchInput.focus();
+    }
+}
