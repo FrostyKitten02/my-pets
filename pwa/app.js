@@ -74,28 +74,39 @@ async function loadPets() {
     const res = await fetch(`${API}/pets`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
-    const pets = await res.json();
+    allPets = await res.json(); // store all pets
+    renderPetList(allPets);
+}
+
+function renderPetList(pets) {
     const list = document.getElementById('petList');
     list.innerHTML = '';
     pets.forEach(pet => {
         const li = document.createElement('li');
         li.textContent = `${pet.name} - ${pet.sex === "M" ? "Male" : "Female"} (${pet.type}) `;
 
-        // Edit Button
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Edit';
         editBtn.onclick = () => startEdit(pet);
-        li.appendChild(editBtn);
 
-        // Delete Button
         const delBtn = document.createElement('button');
         delBtn.textContent = 'Delete';
-        delBtn.style.marginLeft = '8px';
         delBtn.onclick = () => deletePet(pet.id);
-        li.appendChild(delBtn);
 
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
         list.appendChild(li);
     });
+}
+
+function filterPets() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = allPets.filter(p =>
+        p.name.toLowerCase().includes(query) ||
+        p.type.toLowerCase().includes(query) ||
+        (p.sex === 'M' ? 'male' : 'female').includes(query)
+    );
+    renderPetList(filtered);
 }
 
 async function deletePet(id) {

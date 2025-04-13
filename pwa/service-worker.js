@@ -1,6 +1,6 @@
 const CACHE_NAME = 'pet-pwa-cache-v2';
 const CACHE_FILES = [
-    '/',
+    // '/',
     '/index.html',
     '/style.css',
     '/app.js',
@@ -39,10 +39,11 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-    if (event.request.url.includes('/pets')) { // Cache pet data API responses
+    //caching get requests on pets
+    if (event.request.url.includes('/pets') && event.request.method === "GET") {
         event.respondWith(
             caches.open(CACHE_NAME).then(cache => {
-                cache.match(event.request).then(cachedResponse => {
+                return cache.match(event.request).then(cachedResponse => {
                     if (cachedResponse) {
                         return cachedResponse;
                     }
@@ -55,15 +56,6 @@ self.addEventListener('fetch', event => {
                         return response;
                     });
                 })
-            })
-        );
-    } else {
-        event.respondWith(
-            caches.match(event.request).then(cachedResponse => {
-                if (cachedResponse) {
-                    return cachedResponse;
-                }
-                return fetch(event.request);
             })
         );
     }
