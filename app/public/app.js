@@ -149,3 +149,9 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js')
         .then(() => console.log('Service worker registered.'));
 }
+
+window.addEventListener('online', () => {
+    if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ type: 'SYNC_REQUEST' });
+    }
+});
