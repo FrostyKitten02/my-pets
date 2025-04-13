@@ -1,0 +1,13 @@
+body {
+    font-family: sans-serif;
+    padding: 1em;
+    background: #f8f8f8;
+}
+input, button {
+    display: block;
+    margin: 0.5em 0;
+    padding: 0.5em;
+}
+ul {
+    padding-left: 1em;
+}

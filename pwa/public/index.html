@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pet PWA</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<h1>🐶 Pet App</h1>
+
+<div id="auth">
+    <input id="username" placeholder="Username" />
+    <input id="password" placeholder="Password" type="password" />
+    <button onclick="register()">Register</button>
+    <button onclick="login()">Login</button>
+</div>
+
+<div id="main" style="display: none;">
+    <h2>Add a Pet</h2>
+    <input type="hidden" id="editingId" />
+    <input id="petName" placeholder="Pet name" />
+    <input id="petType" placeholder="Pet type" />
+    <select id="sex">
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+    </select>
+    <button onclick="addPet()">Add Pet</button>
+
+    <h2>Your Pets</h2>
+    <ul id="petList"></ul>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
