@@ -81,13 +81,39 @@ async function loadPets() {
         const li = document.createElement('li');
         li.textContent = `${pet.name} - ${pet.sex === "M" ? "Male" : "Female"} (${pet.type}) `;
 
+        // Edit Button
         const editBtn = document.createElement('button');
         editBtn.textContent = 'Edit';
         editBtn.onclick = () => startEdit(pet);
-
         li.appendChild(editBtn);
+
+        // Delete Button
+        const delBtn = document.createElement('button');
+        delBtn.textContent = 'Delete';
+        delBtn.style.marginLeft = '8px';
+        delBtn.onclick = () => deletePet(pet.id);
+        li.appendChild(delBtn);
+
         list.appendChild(li);
     });
+}
+
+async function deletePet(id) {
+    if (!confirm('Are you sure you want to delete this pet?')) return;
+
+    const res = await fetch(`${API}/pets/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    if (res.ok) {
+        alert('Pet deleted');
+        loadPets();
+    } else {
+        alert('Failed to delete pet');
+    }
 }
 
 function startEdit(pet) {
